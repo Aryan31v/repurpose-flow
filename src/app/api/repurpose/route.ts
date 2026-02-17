@@ -93,7 +93,23 @@ export async function POST(req: NextRequest) {
     const jsonMatch = responseText.match(/\{[\s\S]*\}/);
     if (!jsonMatch) throw new Error("Could not parse AI response");
     
-    return NextResponse.json(JSON.parse(jsonMatch[0]));
+    const parsedData = JSON.parse(jsonMatch[0]);
+
+    // Ensure content is always a string (prevents [object Object] in UI)
+    if (parsedData.repurposing_ideas) {
+      parsedData.repurposing_ideas = parsedData.repurposing_ideas.map((idea: any) => {
+        if (typeof idea.content === 'object' && idea.content !== null) {
+          idea.content = JSON.stringify(idea.content, null, 2);
+        }
+        return idea;
+      });
+    }
+
+    if (parsedData.content && typeof parsedData.content === 'object') {
+      parsedData.content = JSON.stringify(parsedData.content, null, 2);
+    }
+    
+    return NextResponse.json(parsedData);
 
   } catch (error: any) {
     console.error("API Error:", error);
