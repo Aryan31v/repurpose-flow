@@ -15,8 +15,16 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
+import { Share2 } from "lucide-react";
+
 export function Header() {
   const { data: session } = useSession();
+
+  const handleShare = () => {
+    const text = "Turning 1 video into 10+ social posts in 30 seconds with @AnnomboyG's RepurposeFlow. \n\nBuilt on #OpenClaw. \n\nCheck it out: https://repurpose-flow.vercel.app #BuildInPublic #AI";
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -27,6 +35,10 @@ export function Header() {
           </Link>
         </div>
         <div className="flex items-center space-x-4">
+          <Button variant="outline" size="sm" onClick={handleShare} className="hidden md:flex items-center gap-2">
+            <Share2 className="h-4 w-4" />
+            Share
+          </Button>
           <SettingsModal />
           <ModeToggle />
           
