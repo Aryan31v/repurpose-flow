@@ -95,18 +95,25 @@ export async function POST(req: NextRequest) {
     
     const parsedData = JSON.parse(jsonMatch[0]);
 
-    // Ensure content is always a string (prevents [object Object] in UI)
+    const formatContent = (content: any) => {
+      if (typeof content === 'object' && content !== null) {
+        return Object.entries(content)
+          .map(([key, value]) => `**${key}:** ${value}`)
+          .join('\n\n');
+      }
+      return content;
+    };
+
+    // Ensure content is always a formatted string (prevents raw JSON brackets in UI)
     if (parsedData.repurposing_ideas) {
       parsedData.repurposing_ideas = parsedData.repurposing_ideas.map((idea: any) => {
-        if (typeof idea.content === 'object' && idea.content !== null) {
-          idea.content = JSON.stringify(idea.content, null, 2);
-        }
+        idea.content = formatContent(idea.content);
         return idea;
       });
     }
 
-    if (parsedData.content && typeof parsedData.content === 'object') {
-      parsedData.content = JSON.stringify(parsedData.content, null, 2);
+    if (parsedData.content) {
+      parsedData.content = formatContent(parsedData.content);
     }
     
     return NextResponse.json(parsedData);
