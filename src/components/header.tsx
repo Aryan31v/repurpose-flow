@@ -54,7 +54,7 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button variant="default" size="sm" onClick={() => signIn("google")}>
+            <Button variant="default" size="sm" onClick={() => alert("Google Login is coming soon! For now, please use your own API key in the Settings.")}>
               Sign In
             </Button>
           )}
