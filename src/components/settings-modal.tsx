@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Settings, Key, Globe, Palette, User, MessageSquare } from "lucide-react"
+import { Settings, Key, Globe, Palette, User, MessageSquare, Zap } from "lucide-react"
 import { useUserSettings } from "@/context/user-settings-context"
 import {
   Select,
@@ -202,6 +202,23 @@ export function SettingsModal() {
                     <SelectItem value="Savage and aggressive builder">Savage and aggressive builder</SelectItem>
                     <SelectItem value="Friendly and educational">Friendly and educational</SelectItem>
                     <SelectItem value="Minimalist and direct">Minimalist and direct</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid gap-2">
+                <Label className="flex items-center gap-2"><Zap className="h-4 w-4" /> Repurpose Strategy (Pro)</Label>
+                <Select 
+                  value={localSettings.repurposeStrategy} 
+                  onValueChange={(val: any) => setLocalSettings({...localSettings, repurposeStrategy: val})}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select Strategy" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="default">Standard Balanced</SelectItem>
+                    <SelectItem value="garyvee">The GaryVee Content Model (Volume)</SelectItem>
+                    <SelectItem value="hormozi">The Alex Hormozi Script (Value-First)</SelectItem>
+                    <SelectItem value="architect">The Architect Framework (Technical Alpha)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

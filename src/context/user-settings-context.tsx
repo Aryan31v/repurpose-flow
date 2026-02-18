@@ -16,6 +16,7 @@ interface UserSettings {
   brandColor: string;
   brandLogo: string; // Base64 or URL
   brandVoice: string;
+  repurposeStrategy: "default" | "garyvee" | "hormozi" | "architect";
 }
 
 interface UserSettingsContextType {
@@ -39,6 +40,7 @@ export function UserSettingsProvider({ children }: { children: React.ReactNode }
     brandColor: "#00ffcc",
     brandLogo: "",
     brandVoice: "Professional and authoritative",
+    repurposeStrategy: "default",
   });
 
   useEffect(() => {

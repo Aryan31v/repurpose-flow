@@ -45,9 +45,11 @@ export default function Home() {
             "x-user-provider": settings.preferredProvider,
             "x-user-base-url": settings.customBaseUrl,
             "x-user-model": settings.customModelName,
-            "x-brand-voice": settings.brandVoice
+            "x-brand-voice": settings.brandVoice,
+            "x-strategy": settings.repurposeStrategy
           } : {
-            "x-brand-voice": settings.brandVoice
+            "x-brand-voice": settings.brandVoice,
+            "x-strategy": settings.repurposeStrategy
           })
         },
         body: JSON.stringify({ content }),
