@@ -11,6 +11,11 @@ interface UserSettings {
   customModelName: string;
   preferredProvider: "groq" | "gemini" | "anthropic" | "custom";
   useUserKey: boolean;
+  // Branding
+  brandName: string;
+  brandColor: string;
+  brandLogo: string; // Base64 or URL
+  brandVoice: string;
 }
 
 interface UserSettingsContextType {
@@ -30,6 +35,10 @@ export function UserSettingsProvider({ children }: { children: React.ReactNode }
     customModelName: "gpt-4o",
     preferredProvider: "groq",
     useUserKey: false,
+    brandName: "",
+    brandColor: "#00ffcc",
+    brandLogo: "",
+    brandVoice: "Professional and authoritative",
   });
 
   useEffect(() => {

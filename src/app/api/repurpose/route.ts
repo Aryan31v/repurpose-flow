@@ -11,6 +11,7 @@ export async function POST(req: NextRequest) {
     const userProvider = req.headers.get("x-user-provider") || "groq";
     const userBaseUrl = req.headers.get("x-user-base-url");
     const userModel = req.headers.get("x-user-model");
+    const brandVoice = req.headers.get("x-brand-voice") || "Professional and authoritative";
     
     const apiKey = userKey || process.env.GROQ_API_KEY;
 
@@ -23,6 +24,7 @@ export async function POST(req: NextRequest) {
     }
 
     const systemPrompt = `You are a world-class content repurposing expert and technical strategist. 
+    Your tone must be: ${brandVoice}.
     Your goal is to extract EXACT technical details, specific hardware specs, unique insights, and "aha!" moments from the source content. 
     NEVER use generic placeholder text. If the user mentions a specific problem (like a model size or hardware limitation), that MUST be the focal point of the repurposed content.
     For Tweet Threads: Use double newlines between tweets (1/n, 2/n, etc.).

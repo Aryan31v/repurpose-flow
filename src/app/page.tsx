@@ -44,8 +44,11 @@ export default function Home() {
             "x-user-key": settings.preferredProvider === 'groq' ? settings.groqApiKey : settings.preferredProvider === 'gemini' ? settings.geminiApiKey : settings.preferredProvider === 'anthropic' ? settings.anthropicApiKey : settings.customApiKey,
             "x-user-provider": settings.preferredProvider,
             "x-user-base-url": settings.customBaseUrl,
-            "x-user-model": settings.customModelName
-          } : {})
+            "x-user-model": settings.customModelName,
+            "x-brand-voice": settings.brandVoice
+          } : {
+            "x-brand-voice": settings.brandVoice
+          })
         },
         body: JSON.stringify({ content }),
       })

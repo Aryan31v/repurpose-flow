@@ -30,6 +30,7 @@ interface FlowCanvasProps {
 }
 
 export function FlowCanvas({ data, originalContent }: FlowCanvasProps) {
+  const { settings } = useUserSettings()
   const [selectedIdea, setSelectedIdea] = useState<RepurposingIdea | null>(null)
   
   const initialNodes: Node[] = useMemo(() => {
@@ -68,9 +69,9 @@ export function FlowCanvas({ data, originalContent }: FlowCanvasProps) {
       source: "root",
       target: idea.id,
       animated: true,
-      style: { stroke: "hsl(var(--primary))", strokeWidth: 2 },
+      style: { stroke: settings.brandColor, strokeWidth: 2 },
     }))
-  }, [data])
+  }, [data, settings.brandColor])
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
